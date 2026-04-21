@@ -1,17 +1,33 @@
 # 🏠 Personal Homelab
 
-A self-hosted homelab running on an old laptop repurposed as a home server. Built to replace cloud services with privacy-respecting, locally-hosted alternatives — accessible from anywhere via a secure VPN tunnel.
+A self-hosted homelab running on an old laptop repurposed as a home server. Built to replace cloud services with privacy-respecting, locally-hosted alternatives, accessible from anywhere via a secure VPN tunnel.
 
 ---
 
-## Stack
+## Information about laptop
 
-| Service       | Purpose                                                        | Tech            |
-| ------------- | -------------------------------------------------------------- | --------------- |
-| **Immich**    | Self-hosted photo & video backup (Google Photos alternative)   | Docker          |
-| **Homepage**  | Unified dashboard for all services                             | Docker          |
-| **Tailscale** | Secure remote access via VPN mesh network                      | WireGuard-based |
-| **Immich ML** | On-device machine learning for face recognition & smart search | Docker          |
+- Got the laptop 10 years ago (very old)
+- Model: Sony vaio (You probably never heard of this because it's very old and discontinued now xD)
+- It has 512gb HDD Storage
+- Some other information in the neofetch below:-
+- ![Neofetch of laptop](./NEOFETCH.png)
+
+---
+
+## Why did i do this
+
+I always saw youtube videos about self hosting and got interested in it. I had tons of personal photos (~around 150gb of photos) in my external hard drive and i wanted get access to them anywhere in my mobile/laptop so i got immich in my old laptop.
+
+---
+
+## Services i used
+
+| Service       | Purpose                                                                  | Tech            |
+| ------------- | ------------------------------------------------------------------------ | --------------- |
+| **Immich**    | Self-hosted photo & video backup (Google Photos open source alternative) | Docker          |
+| **Homepage**  | Unified dashboard for all services (Displays all services in my server)  | Docker          |
+| **Tailscale** | Secure remote access via VPN mesh network (Can use immich anywhere)      | WireGuard-based |
+| **Immich ML** | Lets me run machine learning models of photos on a more powerful device  | Docker          |
 
 ---
 
@@ -22,7 +38,7 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
                         │         Old Laptop Server       │
                         │         (Ubuntu Server)         │
                         │                                 │
-  Local Network  ─────▶│  :2283  Immich                  │
+  Local Network  ──────▶│  :2283  Immich                  │
                         │  :3000  Homepage Dashboard      │
                         │                                 │
                         │  ┌─────────────────────────┐    │
@@ -45,7 +61,7 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
 
 ---
 
-## Services
+## More info on services used
 
 ### Immich
 
@@ -83,74 +99,7 @@ Tailscale creates a secure WireGuard-based mesh VPN between devices. This means 
 
 ---
 
-## Setup
-
-### Prerequisites
-
-- A machine running Ubuntu Server (tested on 22.04 LTS)
-- Docker and Docker Compose installed
-- A Tailscale account (free tier is sufficient)
-
-### Install Docker
-
-```bash
-curl -fsSL https://get.docker.com | sh
-sudo usermod -aG docker $USER
-```
-
-### Clone this repo
-
-```bash
-git clone https://github.com/YOUR_USERNAME/homelab.git
-cd homelab
-```
-
-### Deploy Immich
-
-```bash
-cd immich
-cp .env.example .env
-# Edit .env with your preferred passwords and storage paths
-nano .env
-docker compose up -d
-```
-
-### Set up Tailscale
-
-```bash
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscale up
-```
-
-Follow the auth link, then your server is accessible from any Tailscale-connected device.
-
----
-
-## Environment Variables
-
-Create a `.env` file in the `immich/` directory:
-
-```env
-# Storage
-UPLOAD_LOCATION=/path/to/your/photos
-DB_DATA_LOCATION=/path/to/postgres/data
-
-# Database credentials (change these)
-DB_PASSWORD=your_secure_password
-DB_USERNAME=postgres
-DB_DATABASE_NAME=immich
-
-# Immich version (leave as-is for latest stable)
-IMMICH_VERSION=release
-```
-
-> ⚠️ Never commit your `.env` file. It's listed in `.gitignore`.
-
----
-
-## Why I Built This
-
-I wanted to stop relying on Google Photos for storing personal photos while also learning how real server infrastructure works. This project taught me:
+## This project taught me:
 
 - **Linux server administration** — managing a headless Ubuntu Server
 - **Docker & containerization** — running and coordinating multiple containers with Docker Compose
