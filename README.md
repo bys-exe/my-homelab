@@ -22,7 +22,7 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
                         │         Old Laptop Server       │
                         │         (Ubuntu Server)         │
                         │                                 │
-  Local Network  ──────▶│  :2283  Immich                  │
+  Local Network  ─────▶│  :2283  Immich                  │
                         │  :3000  Homepage Dashboard      │
                         │                                 │
                         │  ┌─────────────────────────┐    │
