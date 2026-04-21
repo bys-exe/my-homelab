@@ -6,14 +6,12 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
 
 ## Stack
 
-| Service            | Purpose                                                        | Tech            |
-| ------------------ | -------------------------------------------------------------- | --------------- |
-| **Immich**         | Self-hosted photo & video backup (Google Photos alternative)   | Docker          |
-| **Homepage**       | Unified dashboard for all services                             | Docker          |
-| **Tailscale**      | Secure remote access via VPN mesh network                      | WireGuard-based |
-| **PostgreSQL**     | Primary database for Immich (with pgvector extension)          | Docker          |
-| **Redis (Valkey)** | Caching and job queue for Immich                               | Docker          |
-| **Immich ML**      | On-device machine learning for face recognition & smart search | Docker          |
+| Service       | Purpose                                                        | Tech            |
+| ------------- | -------------------------------------------------------------- | --------------- |
+| **Immich**    | Self-hosted photo & video backup (Google Photos alternative)   | Docker          |
+| **Homepage**  | Unified dashboard for all services                             | Docker          |
+| **Tailscale** | Secure remote access via VPN mesh network                      | WireGuard-based |
+| **Immich ML** | On-device machine learning for face recognition & smart search | Docker          |
 
 ---
 
@@ -21,12 +19,12 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
 
 ```
                         ┌─────────────────────────────────┐
-                        │         Old Laptop Server        │
-                        │         (Ubuntu Server)          │
-                        │                                  │
+                        │         Old Laptop Server       │
+                        │         (Ubuntu Server)         │
+                        │                                 │
   Local Network  ──────▶│  :2283  Immich                  │
-                        │  :3000  Homepage Dashboard       │
-                        │                                  │
+                        │  :3000  Homepage Dashboard      │
+                        │                                 │
                         │  ┌─────────────────────────┐    │
                         │  │        Docker           │    │
                         │  │  immich-server          │    │
@@ -34,15 +32,15 @@ A self-hosted homelab running on an old laptop repurposed as a home server. Buil
                         │  │  postgres               │    │
                         │  │  redis (valkey)         │    │
                         │  └─────────────────────────┘    │
-                        │                                  │
-                        │  Tailscale (VPN mesh)            │
-                        └──────────────┬──────────────────┘
-                                       │
-                    ┌──────────────────▼──────────────────┐
-                    │           Tailscale Network          │
-                    │   Access from phone / laptop         │
-                    │   anywhere in the world              │
-                    └─────────────────────────────────────┘
+                        │                                 │
+                        │  Tailscale (VPN mesh)           │
+                        └───────────────┬─────────────────┘
+                                        │
+                        ┌───────────────▼─────────────────┐
+                        │       Tailscale Network         │
+                        │   Access from phone / laptop    │
+                        │     anywhere in the world       │
+                        └─────────────────────────────────┘
 ```
 
 ---
@@ -81,7 +79,7 @@ Tailscale creates a secure WireGuard-based mesh VPN between devices. This means 
 
 - No open ports on the home router
 - End-to-end encrypted traffic
-- Works behind CGNAT (most Indian ISPs)
+- Works behind CGNAT (most Indian ISPs (i hate you airtel))
 
 ---
 
@@ -159,16 +157,6 @@ I wanted to stop relying on Google Photos for storing personal photos while also
 - **Networking** — local network access, port mapping, and VPN-based remote access with Tailscale
 - **Service dependencies** — understanding how Immich's server, ML, database, and cache containers depend on each other
 - **Self-hosting** — the full lifecycle of deploying, maintaining, and accessing a production-like service
-
----
-
-## What's Next
-
-- [ ] Add Nginx reverse proxy with SSL (HTTPS access)
-- [ ] Automated database backups with a cron job
-- [ ] Uptime monitoring with Uptime Kuma
-- [ ] Grafana + Prometheus for server metrics dashboard
-- [ ] Migrate to Proxmox for proper VM management
 
 ---
 
